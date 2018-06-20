@@ -9,8 +9,6 @@ namespace ElementaryQR {
 
         [GtkChild]
         private Gtk.Image qr_image;
-        [GtkChild]
-        private Gtk.Button save_button;
         
         private string _qr_text;
         
@@ -26,20 +24,14 @@ namespace ElementaryQR {
                 draw_qr ();
             }
         }
-
-        [GtkCallback (name = "save_button_clicked")]
-        protected void save_button_clicked (Gtk.Button source) 
-        {
-            stdout.printf ("not implemented!\n");
-        }
         
         private void draw_qr () 
         {
-            var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, SIZE, SIZE);
-            stdout.printf ("drawing text: " + qr_text);
-            //QRDecoder.decode (surface, qr_text);
-            QREncoder.encode (surface, qr_text);
-            qr_image.surface = surface;    
+            //var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, SIZE, SIZE);
+            stdout.printf ("drawing text: " + qr_text + "\n");
+            if (!QREncoder.encode_image (qr_image, qr_text)) {
+                stdout.printf ("Couldn't generate the QR code, text may be empty.\n");
+            }
         }
     }
 }
