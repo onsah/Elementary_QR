@@ -17,3 +17,6 @@ ninja
 ## Running
 You can run the program from the terminal simply writing
 ``./elementaryqr``
+
+## Credits
+I have inspired by [genQR application](https://github.com/haecker-felix/genQR) while I was writing this app.
