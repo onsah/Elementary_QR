@@ -5,10 +5,11 @@ namespace ElementaryQR
         private const int LEVEL = 1;
         private const int BLOCK_SIZE = 10;
 
+        [Deprecated]
         public static bool encode(Cairo.Surface surface, string text)
         {
-            if (text == null || text == "") {
-                stdout.printf ("empty text can not be decoded.\n");
+            if (text == null || text.strip () == "") {
+                stdout.printf ("Empty text can not be decoded.\n");
                 return false;
             }
             var qrcode = new QRcode.encodeString8Bit (text, LEVEL, EcLevel.M);
@@ -36,13 +37,13 @@ namespace ElementaryQR
             return true;
         }
 
-        public static bool encode_image(Gtk.Image image, string text)
+        public static bool encode_image(Gtk.Image image, string text, int version)
         {
             if(text == null || text == "") {
                 stdout.printf ("empty text can not be decoded\n");
                 return false;
             }
-            var qrcode = new QRcode.encodeString8Bit (text, LEVEL, EcLevel.M);
+            var qrcode = new QRcode.encodeString8Bit (text, version, EcLevel.M);
             var size = qrcode.width;
             var qr_code_size = size * BLOCK_SIZE;
             var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, 
