@@ -1,4 +1,3 @@
-
 using Gtk;
 
 namespace ElementaryQR {
@@ -22,17 +21,18 @@ namespace ElementaryQR {
             //  See: http://www.qrcode.com/en/about/version.html
         }
         
+        // Setting this to the value may not change the image depending on the difference with the old text but it will always set the text so it is possible to be force to drawing
         public string qr_text
         {
             get { return _qr_text ?? ""; }
             set 
             { 
-                old_text = qr_text;
+                _qr_text = value;
                 if (old_text.contains (value) 
                     || value.contains (old_text)  
                     && (value.length - old_text.length).abs () <= 3 )
                     return;
-                _qr_text = value;
+                old_text = qr_text;
                 draw_qr ();     
             }
         }
