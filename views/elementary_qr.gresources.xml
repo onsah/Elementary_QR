@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gresources>
-  <gresource prefix="/com/zer0/elementary_qr">
-    <file preprocess="xml-stripblanks">elementary_qr.ui</file>
-    <file preprocess="xml-stripblanks">qr_box.ui</file>
-  </gresource>
-</gresources>

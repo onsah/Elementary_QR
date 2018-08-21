@@ -1,0 +1,9 @@
+src/FileManager.vala
+src/MainWindow.vala
+src/QRApp.vala
+src/QREncoder.vala
+src/QRImageBox.vala
+src/Utils.vala
+src/eQR.vala
+data/interface/elementary_qr.ui
+data/interface/qr_box.ui

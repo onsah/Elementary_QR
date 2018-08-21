@@ -1,0 +1,46 @@
+### AutoVala Project ###
+autovala_version: 28
+project_name: eQR
+*vala_version: 0.36
+
+*gresource: elementary_qr_gresource_xml data/elementary_qr.gresource.xml
+
+vapidir: src/vapis
+
+vala_binary: src/eQR
+compile_options: --target-glib=2.38
+use_gresource: elementary_qr_gresource_xml
+vala_check_package: cairo
+vala_check_package: granite
+vala_check_package: gtk+-3.0
+vala_check_package: libqrencode
+*vala_check_package: gio-2.0
+*vala_check_package: glib-2.0
+*vala_check_package: gobject-2.0
+*vala_source: FileManager.vala
+*vala_source: MainWindow.vala
+*vala_source: QRApp.vala
+*vala_source: QREncoder.vala
+*vala_source: QRImageBox.vala
+*vala_source: Utils.vala
+*vala_source: eQR.vala
+
+
+*po: po
+
+*translate: glade data/interface/elementary_qr.ui
+*translate: glade data/interface/qr_box.ui
+*translate: vala src/FileManager.vala
+*translate: vala src/MainWindow.vala
+*translate: vala src/QRApp.vala
+*translate: vala src/QREncoder.vala
+*translate: vala src/QRImageBox.vala
+*translate: vala src/Utils.vala
+*translate: vala src/eQR.vala
+
+*data: data/local
+
+*doc: doc
+
+*scheme: data/elementary_qr.gschema.xml
+

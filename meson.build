@@ -1,22 +1,23 @@
-project('elementaryqr', 'vala', 'c')
+project('eQR',['c','vala'])
 
-add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala' )
-add_project_arguments('--gresources=' + meson.current_source_dir() + '/views/elementary_qr.gresources.xml', language: 'vala')
+add_global_arguments('-DGETTEXT_PACKAGE="eQR"',language: 'c')
 
-add_project_arguments(  ['--target-glib=2.38'], language: 'vala')
+cairo_dep = dependency('cairo')
+granite_dep = dependency('granite')
+gtk_3_0_dep = dependency('gtk+-3.0')
+libqrencode_dep = dependency('libqrencode')
+gio_2_0_dep = dependency('gio-2.0')
+glib_2_0_dep = dependency('glib-2.0')
+gobject_2_0_dep = dependency('gobject-2.0')
 
-glib = dependency('glib-2.0')
-gobject = dependency('gobject-2.0', version: '>=2.38')
-gtk = dependency('gtk+-3.0')
-cairo = dependency('cairo')
-qrencode = dependency('libqrencode')
+elementary_qr_gresource_xml_generator = generator(find_program('glib-compile-resources'), arguments: [ '--sourcedir=@SOURCE_DIR@/data' , '--generate-source', '--target=@BUILD_DIR@/elementary_qr.gresource.xml.c', '@INPUT@'], output: '@PLAINNAME@.c')
 
-run_command('glib-compile-resources', 'views/elementary_qr.gresources.xml', 
-                                      '--target=resources.c', 
-                                      '--sourcedir=' + join_paths(meson.current_source_dir(), 'views'), 
-                                      '--generate-source')
+elementary_qr_gresource_xml_file_c = elementary_qr_gresource_xml_generator.process(['data/elementary_qr.gresource.xml'])
 
-src = ['MainWindow.vala', 'QRApp.vala', 'QREncoder.vala', 'QRImageBox.vala', 'resources.c']
+meson.add_install_script(join_paths(meson.current_source_dir(),'meson_scripts','install_data.sh'),join_paths(get_option('prefix'),get_option('datadir'),'eQR'),join_paths(meson.current_source_dir(),'data/local','','*'))
 
-executable( 'elementaryqr', src, 
-            dependencies: [glib, gobject, gtk, cairo, qrencode])
+meson.add_install_script(join_paths(meson.current_source_dir(),'meson_scripts','install_data.sh'),join_paths(get_option('prefix'),get_option('datadir'),'doc','eQR'),join_paths(meson.current_source_dir(),'doc','','*'))
+
+install_data('data/elementary_qr.gschema.xml', install_dir: join_paths(get_option('prefix'),get_option('datadir'), 'glib-2.0', 'schemas'))
+meson.add_install_script('meson_scripts/install_schemas.py')
+subdir('src')
