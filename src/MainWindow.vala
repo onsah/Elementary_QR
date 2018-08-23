@@ -44,14 +44,14 @@ namespace ElementaryQR {
         [GtkCallback]
         private void save_button_clicked (Gtk.Button source)
         {
-            var chooser = FileManager.create_file_chooser ("Select folder to save pictures", this);
+            var chooser = Dialogs.save_dialog;
             if (chooser.run () == Gtk.ResponseType.ACCEPT) {
                 var file = chooser.get_file ();
                 if (FileManager.save_png (image_box.image, file)) {
                     toast.send_notification ();
                 }
             }
-            chooser.destroy ();
+            chooser.close ();
         }
 
         [GtkCallback]
