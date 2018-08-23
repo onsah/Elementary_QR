@@ -11,14 +11,15 @@ QR generator for elementary OS
 
 ## Building
 ```
+autovala meson
 meson build && cd build 
 ninja
 ```
-You can build using cmake also.
+You can build using cmake if you want.
 
 ## Running
-You can run the program from the terminal simply writing
-``./elementaryqr``
+You can run the program from the terminal simply writing in the build/src directory
+``./eQR``
 
 ## Credits
 I have inspired by [genQR application](https://github.com/haecker-felix/genQR) while I was writing this app.
